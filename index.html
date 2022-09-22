@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <link href="./styles.css" rel="stylesheet">
+    <title>openSAP CSD-Excel to JSON Converter</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <h5>Drop your CSD-Excel into this zone:</h5>
+    <div id="dropzone"></div>
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+    <div class = "frame">
+    <p>Json will automatically be created and saved in same folder your CSD-Excel is coming from.</p>
+    <p><b>Attention!</b> This converter will only work properly with openSAP CSD-Excel with Tab "MediaAssets_Master_new".</p>
+    </div>
   </body>
 </html>

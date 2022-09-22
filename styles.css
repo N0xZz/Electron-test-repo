@@ -1,0 +1,21 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+#dropzone {
+    border-radius: 10px;
+    margin: 10px auto;
+    width: 70vw;
+    height: 40vh;
+    border: 3px dotted crimson;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif ;
+    
+}
+p {
+    font-size: small;
+    padding: 8px auto;
+}
+.frame{
+    width: 80%; margin:8px auto; padding: 8px auto; background: #CCCCCC ; text-align: center;
+}
