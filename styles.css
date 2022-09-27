@@ -19,3 +19,18 @@ p {
 .frame{
     width: 80%; margin:8px auto; padding: 8px auto; background: #CCCCCC ; text-align: center;
 }
+
+/* Update Notification */
+#notification {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  .hidden {
+    display: none;
+  }

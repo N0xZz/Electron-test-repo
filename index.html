@@ -7,14 +7,27 @@
     <link href="./styles.css" rel="stylesheet">
     <title>openSAP CSD-Excel to JSON Converter</title>
   </head>
+  <!--
+  <button id="xlstojson">Run Function</button>
+  -->
   <body>
     <h5>Drop your CSD-Excel into this zone:</h5>
     <div id="dropzone"></div>
     <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
     <div class = "frame">
     <p>Json will automatically be created and saved in same folder your CSD-Excel is coming from.</p>
     <p><b>Attention!</b> This converter will only work properly with openSAP CSD-Excel with Tab "MediaAssets_Master_new".</p>
     </div>
+    <p id="version"></p>
+    <div id="notification" class="hidden">
+      <p id="message"></p>
+      <button id="close-button" onClick="closeNotification()">
+        Close
+      </button>
+      <button id="restart-button" onClick="restartApp()" class="hidden">
+        Restart
+      </button>
+    </div>
+    <script src="./renderer.js"></script>
   </body>
 </html>
