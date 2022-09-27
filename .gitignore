@@ -20,6 +20,7 @@
 # Private Node Modules
 node_modules/
 creds.js
+.electron-cache/
 
 # Private Files
 *.json
