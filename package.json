@@ -1,0 +1,30 @@
+{
+  "name": "electron-test-repo",
+  "version": "1.0.6",
+  "description": "Hello World!",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N0xZz/Electron-test-repo.git"
+  },
+  "author": "Maximilian Gramberg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/N0xZz/Electron-test-repo/issues"
+  },
+  "homepage": "https://github.com/N0xZz/Electron-test-repo#readme",
+  "devDependencies": {
+    "electron": "^20.2.0",
+    "electron-builder": "^23.3.3",
+    "xls-to-json": "^2.1.1"
+  },
+  "dependencies": {
+    "electron-updater": "^5.2.1",
+    "xls-to-json": "^2.1.1"
+  }
+}

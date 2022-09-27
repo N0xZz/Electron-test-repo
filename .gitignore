@@ -23,7 +23,8 @@ creds.js
 .electron-cache/
 
 # Private Files
-*.json
+#*.json
+package-lock.json
 *.csv
 *.csv.gz
 *.tsv
