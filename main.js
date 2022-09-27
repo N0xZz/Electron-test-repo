@@ -1,11 +1,11 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require('electron')
-const { autoUpdater } = require('electron-updater');
+const { autoUpdater } = require('electron-updater')
 const path = require('path')
 const os = require('os')
 
 // set env
-process.env.NODE_ENV = 'production'
+process.env.NODE_ENV = 'development'
 
 const isDev = process.env.NODE_ENV !== 'production' ? true : false
 const isMac = process.platform === 'darwin' ? true : false
@@ -24,19 +24,17 @@ function createMainWindow () {
       contextIsolation: false,
     }
   })
-
-  // Open the DevTools if env = development.
-  if (isDev) {
-    mainWindow.webContents.openDevTools()
-  }
-
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
   mainWindow.setMenuBarVisibility(false)
   // autoUpdater
-  mainWindow.once('ready-to-show', () => {
-    autoUpdater.checkForUpdatesAndNotify();
-  });
+  // Open the DevTools if env = development.
+  if (isDev) {
+    mainWindow.webContents.openDevTools()
+    autoUpdater.checkForUpdates()
+  } else {
+    autoUpdater.checkForUpdatesAndNotify()
+  }
 }
 
 // This method will be called when Electron has finished
@@ -65,17 +63,17 @@ app.on('window-all-closed', function () {
 
 // check app-version
 ipcMain.on('app_version', (event) => {
-  event.sender.send('app_version', { version: app.getVersion() });
-});
+  event.sender.send('app_version', { version: app.getVersion() })
+})
 
 // check if update available
 autoUpdater.on('update-available', () => {
   mainWindow.webContents.send('update_available');
-});
+})
 autoUpdater.on('update-downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
-});
+})
 
 ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
-});
+  autoUpdater.quitAndInstall()
+})
