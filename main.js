@@ -31,9 +31,6 @@ function createMainWindow () {
   // Open the DevTools if env = development.
   if (isDev) {
     mainWindow.webContents.openDevTools()
-    autoUpdater.checkForUpdates()
-  } else {
-    autoUpdater.checkForUpdatesAndNotify()
   }
 }
 
@@ -42,6 +39,7 @@ function createMainWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createMainWindow()
+  autoUpdater.checkForUpdatesAndNotify()
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
