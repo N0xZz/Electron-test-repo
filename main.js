@@ -32,6 +32,9 @@ function createMainWindow () {
   if (isDev) {
     mainWindow.webContents.openDevTools()
   }
+  mainWindow.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify()
+  })
 }
 
 // This method will be called when Electron has finished
@@ -39,8 +42,7 @@ function createMainWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createMainWindow()
-  autoUpdater.checkForUpdatesAndNotify()
-
+  
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
