@@ -3,6 +3,8 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
 const os = require('os')
+autoUpdater.logger = require("electron-log")
+autoUpdater.logger.transports.file.level = "info"
 
 // set env
 process.env.NODE_ENV = 'development'
