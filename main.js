@@ -68,6 +68,7 @@ ipcMain.on('app_version', (event) => {
 
 // check if update available
 autoUpdater.on('update-available', () => {
+  console.log('update available.');
   mainWindow.webContents.send('update_available');
 })
 autoUpdater.on('update-downloaded', () => {
