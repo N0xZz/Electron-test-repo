@@ -30,6 +30,10 @@ ipcRenderer.on('update_downloaded', () => {
   notification.classList.remove('hidden');
 });
 
+ipcRenderer.on('ping', (event, message) => {
+  console.log(message) // Prints 'whoooooooh!'
+})
+
 function closeNotification() {
     notification.classList.add('hidden');
   }
