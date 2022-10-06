@@ -33,6 +33,7 @@ function createMainWindow () {
     mainWindow.webContents.openDevTools()
   }
   mainWindow.once('ready-to-show', () => {
+    console.log("ready to show");
     autoUpdater.checkForUpdatesAndNotify()
   })
 }
