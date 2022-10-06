@@ -1,6 +1,6 @@
 {
   "name": "electron-test-repo",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Electron App to convert XLS to JSON",
   "main": "main.js",
   "scripts": {
