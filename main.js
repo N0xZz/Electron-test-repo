@@ -99,6 +99,6 @@ ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall()
 })
 
-const sendStatusToWindow = (text: string) => {
+const sendStatusToWindow = (text, string) => {
   mainWindow.webContents.send('message', text);
 }
