@@ -1,10 +1,13 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, webContents } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
 const os = require('os')
 autoUpdater.logger = require("electron-log")
 autoUpdater.logger.transports.file.level = "info"
+
+
+let updateInterval = null;
 
 // set env
 process.env.NODE_ENV = 'development'
@@ -73,8 +76,18 @@ ipcMain.on('app_version', (event) => {
 // check if update available
 autoUpdater.on('update-available', () => {
   console.log('update available.');
-  mainWindow.webContents.send('ping', 'whoooooooh!');
-  mainWindow.webContents.send('update_available');
+  dialog.showMessageBox({
+      type: 'info',
+      title: 'Update available',
+      message: 'A beta update is available. Do you want to update now?',
+      buttons: ['Yes', 'No']
+  }).then((result) => {
+      if (result.response === 0) {
+          console.log("Download Update.")
+          autoUpdater.downloadUpdate();
+      }
+  });
+//  mainWindow.webContents.send('update_available');
 })
 autoUpdater.on('update-downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
