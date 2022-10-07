@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, webContents } = require('electron')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
 const os = require('os')
@@ -69,36 +69,17 @@ ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() })
 })
 
+
 // check if update available
-autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
+autoUpdater.on('update-available', () => {
+  console.log('update available.');
+  mainWindow.webContents.send('ping', 'whoooooooh!');
+  mainWindow.webContents.send('update_available');
+})
+autoUpdater.on('update-downloaded', () => {
+  mainWindow.webContents.send('update_downloaded');
 })
 
-autoUpdater.on('update-available', () => {
-  sendStatusToWindow('Update available.');
-  if (isSilent) {
-    autoUpdater.downloadUpdate();
-    return;
-  }
-  dialog.showMessageBox({
-    type: 'info',
-    title: 'Found Updates',
-    message: 'New updates are available, do you want update now?',
-    defaultId: 0,
-    cancelId: 1,
-    buttons: ['Yes', 'No']
-  }, (buttonIndex) => {
-    if (buttonIndex === 0) {
-      autoUpdater.downloadUpdate();
-    }
-  });
-});
-
-// test code
 ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall()
 })
-
-const sendStatusToWindow = (text, string) => {
-  mainWindow.webContents.send('message', text);
-}
