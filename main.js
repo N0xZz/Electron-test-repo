@@ -48,6 +48,8 @@ function createMainWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createMainWindow()
+
+  autoUpdater.autoDownload = false;
   
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
@@ -75,11 +77,10 @@ ipcMain.on('app_version', (event) => {
 
 // check if update available
 autoUpdater.on('update-available', () => {
-  console.log('update available.');
   dialog.showMessageBox({
       type: 'info',
       title: 'Update available',
-      message: 'A beta update is available. Do you want to update now?',
+      message: 'A update is available. Do you want to update now?',
       buttons: ['Yes', 'No']
   }).then((result) => {
       if (result.response === 0) {
@@ -89,10 +90,21 @@ autoUpdater.on('update-available', () => {
   });
 //  mainWindow.webContents.send('update_available');
 })
-autoUpdater.on('update-downloaded', () => {
-  mainWindow.webContents.send('update_downloaded');
+autoUpdater.on('update-downloaded', (_event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: `A new ${autoUpdater.channel} version has been downloaded. Restart the application to apply the updates.`
+  };
+
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  });
+//  mainWindow.webContents.send('update_downloaded');
 })
 
-ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall()
-})
+//ipcMain.on('restart_app', () => {
+//  autoUpdater.quitAndInstall()
+//})
