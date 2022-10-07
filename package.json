@@ -1,12 +1,12 @@
 {
   "name": "electron-test-repo",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Electron App to convert XLS to JSON",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder build --win --publish never",
-    "deploy": "electron-builder build --win --publish always"
+    "deploy": "electron-builder build --win --mac --publish always"
   },
   "repository": {
     "type": "git",
