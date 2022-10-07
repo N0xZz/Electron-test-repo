@@ -38,7 +38,6 @@ function createMainWindow () {
     mainWindow.webContents.openDevTools()
   }
   mainWindow.once('ready-to-show', () => {
-    console.log("ready to show");
     autoUpdater.checkForUpdatesAndNotify()
   })
 }
@@ -88,7 +87,6 @@ autoUpdater.on('update-available', () => {
           autoUpdater.downloadUpdate();
       }
   });
-//  mainWindow.webContents.send('update_available');
 })
 autoUpdater.on('update-downloaded', (_event, releaseNotes, releaseName) => {
   const dialogOpts = {
@@ -102,9 +100,4 @@ autoUpdater.on('update-downloaded', (_event, releaseNotes, releaseName) => {
   dialog.showMessageBox(dialogOpts).then((returnValue) => {
     if (returnValue.response === 0) autoUpdater.quitAndInstall()
   });
-//  mainWindow.webContents.send('update_downloaded');
 })
-
-//ipcMain.on('restart_app', () => {
-//  autoUpdater.quitAndInstall()
-//})

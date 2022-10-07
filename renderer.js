@@ -7,9 +7,7 @@
 
 const { ipcRenderer } = require('electron')
 const version = document.getElementById('version');
-const notification = document.getElementById('notification');
-const message = document.getElementById('message');
-const restartButton = document.getElementById('restart-button');
+const isMac = process.platform === 'darwin' ? true : false
       
 ipcRenderer.send('app_version');
 ipcRenderer.on('app_version', (event, arg) => {
@@ -17,26 +15,16 @@ ipcRenderer.on('app_version', (event, arg) => {
   version.innerText = 'Version ' + arg.version;
 });
 
-ipcRenderer.on('update_available', () => {
-  console.log('update available');
-  ipcRenderer.removeAllListeners('update_available');
-  message.innerText = 'A new update is available. Downloading now...';
-  notification.classList.remove('hidden');
-});
-ipcRenderer.on('update_downloaded', () => {
-  ipcRenderer.removeAllListeners('update_downloaded');
-  message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
-  restartButton.classList.remove('hidden');
-  notification.classList.remove('hidden');
-});
 
-ipcRenderer.on('ping', (event, message) => {
-  console.log(message) // Prints 'whoooooooh!'
-})
+document.getElementById("openProgram").addEventListener("click", openProgram);
 
-function closeNotification() {
-    notification.classList.add('hidden');
+function openProgram(){
+  if (isMac) {
+    var executablePath1 = "C:\\Users\\C5265546\\AppData\\Local\\Programs\\electron-test-repo\\electron-test-repo.exe";
   }
-function restartApp() {
-    ipcRenderer.send('restart_app');
+  if (!isMac) {
+    var executablePath1 = "C:\\Users\\C5265546\\AppData\\Local\\Programs\\electron-test-repo\\electron-test-repo.exe";
   }
+  document.getElementById("openProgram").classList.add('hidden');
+  window.openApp(executablePath1);
+}

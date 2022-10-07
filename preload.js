@@ -41,8 +41,20 @@ dropzone.addEventListener("drop", (e) =>{
         }
       )
      }
+     document.getElementById("openProgram").classList.remove('hidden');
   })
 })
+
+window.openApp = function(executablePath) {
+  var child = require('child_process').execFile;
+  child(executablePath, function(err, data) {
+  if(err){
+  console.error(err);
+  return;
+  }
+  console.log(data.toString());
+  });
+};
 
 
 
